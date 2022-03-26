@@ -1,2 +1,3 @@
 # PhoenixCalculator
-An idea to create calculator with JavaFX.
+
+A challenge to create calculator with JavaFX.
