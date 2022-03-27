@@ -1,15 +1,34 @@
 package eu.mapidev.calculator.phoenix;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class MainController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainController implements Initializable {
 
     @FXML
-    private Label welcomeText;
+    private VBox root;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private Stage primaryStage;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        root.setOnMousePressed(pressEvent -> {
+            root.setOnMouseDragged(dragEvent -> {
+                if (primaryStage == null)
+                    return;
+
+                primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }

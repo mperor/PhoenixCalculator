@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" styleClass="content,calculator" spacing="5.0" xmlns:fx="http://javafx.com/fxml"
+      prefHeight="590" prefWidth="370"
+      fx:controller="eu.mapidev.calculator.phoenix.MainController" stylesheets="@css/style.css">
+
+</VBox>

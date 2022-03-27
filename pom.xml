@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                phoenix/eu.mapidev.calculator.phoenix.Launcher
+                                phoenix/eu.mapidev.calculator.phoenix.ApplicationLauncher
                             </mainClass>
                         </configuration>
                     </execution>
