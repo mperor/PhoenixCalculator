@@ -3,6 +3,7 @@ package eu.mapidev.calculator.phoenix;
 import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,13 +21,16 @@ public class ApplicationLoader extends Preloader {
     }
 
     private void showPreloader(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationLoader.class.getClassLoader().getResource("loader-view.fxml"));
+        ClassLoader classLoader = getClass().getClassLoader();
+        FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("loader-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.toFront();
         stage.centerOnScreen();
+        Image icon = new Image(classLoader.getResourceAsStream("img/icon.png"));
+        stage.getIcons().add(icon);
         stage.show();
     }
 
