@@ -12,17 +12,17 @@ import java.io.IOException;
 public class ApplicationLauncher extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationLauncher.class.getClassLoader().getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Phoenix Calculator");
+        primaryStage.setTitle("Phoenix Calculator");
         scene.setFill(Color.TRANSPARENT);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
         MainController controller = fxmlLoader.getController();
-        controller.setPrimaryStage(stage);
+        controller.setPrimaryStage(primaryStage);
     }
 
     @Override
