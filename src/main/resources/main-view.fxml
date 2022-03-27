@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox fx:id="root" styleClass="content,calculator" spacing="5.0" xmlns:fx="http://javafx.com/fxml"
-      prefHeight="590" prefWidth="370"
-      fx:controller="eu.mapidev.calculator.phoenix.MainController" stylesheets="@css/style.css">
+<GridPane fx:id="root" prefHeight="590" prefWidth="370" styleClass="content,calculator" stylesheets="@css/style.css"
+          xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.2"
+          fx:controller="eu.mapidev.calculator.phoenix.MainController">
 
-</VBox>
+    <VBox prefHeight="140" styleClass="top" GridPane.columnSpan="4">
+        <Label styleClass="memory" text="0"/>
+        <Label styleClass="result" text="0"/>
+    </VBox>
+
+    <Button prefWidth="Infinity" text="\%" GridPane.rowIndex="1"/>
+    <Button prefWidth="Infinity" text="+/-" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Button prefWidth="Infinity" text="C" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <Button styleClass="operation" prefWidth="Infinity" text="/" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+    <Button prefWidth="Infinity" text="7" GridPane.rowIndex="2"/>
+    <Button prefWidth="Infinity" text="8" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Button prefWidth="Infinity" text="9" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+    <Button styleClass="operation" prefWidth="Infinity" text="X" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+    <Button prefWidth="Infinity" text="4" GridPane.rowIndex="3"/>
+    <Button prefWidth="Infinity" text="5" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Button prefWidth="Infinity" text="6" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+    <Button style="-fx-font-size: 38px;" styleClass="operation" prefWidth="Infinity" text="-" GridPane.rowIndex="3"
+            GridPane.columnIndex="3"/>
+
+    <Button prefWidth="Infinity" text="1" GridPane.rowIndex="4"/>
+    <Button prefWidth="Infinity" text="2" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Button prefWidth="Infinity" text="3" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+    <Button style="-fx-font-size: 32px;" styleClass="operation" prefWidth="Infinity" text="+" GridPane.rowIndex="4"
+            GridPane.columnIndex="3"/>
+
+    <Button style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" text="0" GridPane.rowIndex="5"/>
+    <Button style="-fx-font-size: 32px;" prefWidth="Infinity" text="," GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Button style="-fx-font-size: 32px;" styleClass="equality" prefWidth="Infinity" text="=" GridPane.rowIndex="5"
+            GridPane.columnIndex="2" GridPane.columnSpan="2"/>
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="25"/>
+        <ColumnConstraints percentWidth="25"/>
+        <ColumnConstraints percentWidth="25"/>
+        <ColumnConstraints percentWidth="25"/>
+    </columnConstraints>
+</GridPane>

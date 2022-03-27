@@ -57,7 +57,6 @@
 }
 
 .content {
-    -fx-padding: 20;
     -fx-alignment: center;
     -fx-background-radius: 5;
 }
@@ -69,10 +68,76 @@
 }
 
 .text {
+    -fx-font-family: 'Montserrat Regular';
     -fx-font-smoothing-type: gray;
 }
 
+/* CALCULATOR STYLES */
 .calculator {
     -fx-background-color: #000;
     -fx-alignment: top-center;
+}
+
+.top {
+    -fx-padding: 0 20 0 20;
+    -fx-alignment: center-right;
+}
+
+.memory {
+    -fx-text-fill: #d98192;
+    -fx-font-size: 18px;
+}
+
+.result {
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+}
+
+.calculator .button {
+    -fx-pref-height: 90px;
+    -fx-font-size: 21px;
+    -fx-background-color: linear-gradient(to bottom right, #ffffff, #f4f4f4);
+    -fx-background-radius: 0;
+}
+
+.calculator .button:hover {
+    -fx-background-color: derive(#f4f4f4, -15%);
+}
+
+.calculator .button:pressed {
+    -fx-background-color: derive(#f4f4f4, -25%);
+    -fx-effect: innershadow(one-pass-box, #f4f4f4, 5, 0.2, 0.0, 0.0)
+}
+
+.calculator .button .text {
+    -fx-font-family: 'Montserrat ExtraLight';
+}
+
+.button.operation {
+    -fx-background-color: #9155e1;
+    -fx-text-fill: white;
+}
+
+.button.operation:hover {
+    -fx-background-color: derive(#9155e1, -15%);
+}
+
+.button.operation:pressed {
+    -fx-background-color: derive(#9155e1, -25%);
+    -fx-effect: innershadow(one-pass-box, #9155e1, 5, 0.2, 0.0, 0.0)
+}
+
+.button.equality {
+    -fx-background-color: #e62e89;
+    -fx-text-fill: white;
+    -fx-background-radius: 0 0 5 0;
+}
+
+.button.equality:hover {
+    -fx-background-color: derive(#e62e89, -15%);
+}
+
+.button.equality:pressed {
+    -fx-background-color: derive(#e62e89, -25%);
+    -fx-effect: innershadow(one-pass-box, #e62e89, 5, 0.2, 0.0, 0.0)
 }
