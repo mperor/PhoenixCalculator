@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    public static final String DEFAULT_RESULT = "0";
+
     @FXML
     private GridPane root;
     @FXML
@@ -40,17 +42,24 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void clean(ActionEvent actionEvent) {
-        lblMemory.setText("0");
-        lblResult.setText("0");
+    public void concatNumber(ActionEvent actionEvent) {
+        String buttonTextNumber = ((Button) actionEvent.getSource()).getText();
+        String result = lblResult.getText();
+        lblResult.setText(DEFAULT_RESULT.equals(result) ? buttonTextNumber : result + buttonTextNumber);
     }
 
     @FXML
-    public void concatNumber(ActionEvent actionEvent) {
-        String buttonTextNumber = ((Button) actionEvent.getSource()).getText();
-        if ("0".equals(lblResult.getText()))
-            lblResult.setText(buttonTextNumber);
-        else
-            lblResult.setText(lblResult.getText() + buttonTextNumber);
+    public void clean(ActionEvent actionEvent) {
+        lblMemory.setText(DEFAULT_RESULT);
+        lblResult.setText(DEFAULT_RESULT);
+    }
+
+    @FXML
+    public void changeSign(ActionEvent actionEvent) {
+        String result = lblResult.getText();
+        if (DEFAULT_RESULT.equals(result))
+            return;
+
+        lblResult.setText(result.startsWith("-") ? result.substring(1) : "-" + result);
     }
 }
