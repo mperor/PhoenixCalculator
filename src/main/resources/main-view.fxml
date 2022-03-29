@@ -35,7 +35,7 @@
             GridPane.columnIndex="3"/>
 
     <Button text="0" style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" GridPane.rowIndex="5" onAction="#concatNumber"/>
-    <Button text="," style="-fx-font-size: 32px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Button text="," style="-fx-font-size: 32px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#addComma"/>
     <Button text="=" style="-fx-font-size: 32px;" styleClass="equality" prefWidth="Infinity" GridPane.rowIndex="5"
             GridPane.columnIndex="2" GridPane.columnSpan="2"/>
 

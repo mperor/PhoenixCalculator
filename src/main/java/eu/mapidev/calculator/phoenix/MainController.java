@@ -1,5 +1,6 @@
 package eu.mapidev.calculator.phoenix;
 
+import eu.mapidev.calculator.phoenix.utils.ResultUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,5 +62,14 @@ public class MainController implements Initializable {
             return;
 
         lblResult.setText(result.startsWith("-") ? result.substring(1) : "-" + result);
+    }
+
+    @FXML
+    public void addComma(ActionEvent actionEvent) {
+        String result = lblResult.getText();
+        if (result.contains(ResultUtils.COMMA))
+            return;
+
+        lblResult.setText(result + ResultUtils.COMMA);
     }
 }
