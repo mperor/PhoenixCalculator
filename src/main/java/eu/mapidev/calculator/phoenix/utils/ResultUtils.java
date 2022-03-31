@@ -16,8 +16,16 @@ public class ResultUtils {
         }
     }
 
+    public static String convertBigDecimalToString(BigDecimal bigDecimal) {
+        String string = bigDecimal.toString();
+        if (string.contains(DOT))
+            string = removeZeroesInFractionalPart(string);
+
+        return removeDotIfLastCharacter(string).replace(DOT, COMMA);
+    }
+
     private static String replaceCommaWithDot(String string) {
-        return string.replaceAll(COMMA, DOT);
+        return string.replace(COMMA, DOT);
     }
 
     private static String simplifyStringBeforeConvert(String string) {
