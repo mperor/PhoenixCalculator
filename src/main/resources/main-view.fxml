@@ -15,12 +15,12 @@
     <Button text="\%" prefWidth="Infinity" GridPane.rowIndex="1" onAction="#doPercent"/>
     <Button text="+/-" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#changeSign"/>
     <Button text="C" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="2" onAction="#clean"/>
-    <Button text="/" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#doOperation"/>
+    <Button text="/" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#doOperation"/>
 
     <Button text="7" prefWidth="Infinity" GridPane.rowIndex="2" onAction="#concatNumber"/>
     <Button text="8" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#concatNumber"/>
     <Button text="9" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="2" onAction="#concatNumber"/>
-    <Button text="x" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="3" onAction="#doOperation"/>
+    <Button text="x" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="3" onAction="#doOperation"/>
 
     <Button text="4" prefWidth="Infinity" GridPane.rowIndex="3" onAction="#concatNumber"/>
     <Button text="5" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#concatNumber"/>
@@ -31,12 +31,12 @@
     <Button text="1" prefWidth="Infinity" GridPane.rowIndex="4" onAction="#concatNumber"/>
     <Button text="2" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="1" onAction="#concatNumber"/>
     <Button text="3" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="2" onAction="#concatNumber"/>
-    <Button text="+" style="-fx-font-size: 32px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="4"
+    <Button text="+" style="-fx-font-size: 28px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="4"
             GridPane.columnIndex="3" onAction="#doOperation"/>
 
     <Button text="0" style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" GridPane.rowIndex="5" onAction="#concatNumber"/>
-    <Button text="," style="-fx-font-size: 32px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#addComma"/>
-    <Button text="=" style="-fx-font-size: 32px;" styleClass="equality" prefWidth="Infinity" GridPane.rowIndex="5"
+    <Button text="," style="-fx-font-size: 35px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#addComma"/>
+    <Button text="=" style="-fx-font-size: 35px;" styleClass="equality" prefWidth="Infinity" GridPane.rowIndex="5"
             GridPane.columnIndex="2" GridPane.columnSpan="2" onAction="#calculateResult"/>
 
     <columnConstraints>
