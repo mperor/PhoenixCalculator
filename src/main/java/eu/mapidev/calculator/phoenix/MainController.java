@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.EnumSet;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -58,6 +59,18 @@ public class MainController implements Initializable {
             lblResult.setText(buttonTextNumber);
         else
             lblResult.setText(result + buttonTextNumber);
+
+        calledCalculatorOption = CalledCalculatorOption.INPUT_NUMBER;
+    }
+
+    @FXML
+    public void doPercent(ActionEvent actionEvent) {
+        String result = lblResult.getText();
+        BigDecimal decimalResult = ResultUtils.safeConvertStringToBigDecimal(result);
+
+        storedOperation.filter(operation -> EnumSet.of(ArithmeticOperation.ADD, ArithmeticOperation.SUBTRACT).contains(operation))
+                .ifPresentOrElse(arithmeticOperation -> lblResult.setText(ResultUtils.convertBigDecimalToString(storedResult.multiply(decimalResult.divide(BigDecimal.valueOf(100))))),
+                        () -> lblResult.setText(ResultUtils.convertBigDecimalToString(decimalResult.divide(BigDecimal.valueOf(100)))));
 
         calledCalculatorOption = CalledCalculatorOption.INPUT_NUMBER;
     }

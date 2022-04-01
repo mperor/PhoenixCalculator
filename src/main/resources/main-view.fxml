@@ -12,7 +12,7 @@
         <Label fx:id="lblResult" styleClass="result" text="0"/>
     </VBox>
 
-    <Button text="\%" prefWidth="Infinity" GridPane.rowIndex="1"/>
+    <Button text="\%" prefWidth="Infinity" GridPane.rowIndex="1" onAction="#doPercent"/>
     <Button text="+/-" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#changeSign"/>
     <Button text="C" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="2" onAction="#clean"/>
     <Button text="/" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#doOperation"/>
