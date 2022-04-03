@@ -138,7 +138,7 @@
     -fx-background-color: derive(#f4f4f4, -15%);
 }
 
-.calculator .button:pressed {
+.calculator .button:pressed, .calculator .button:armed {
     -fx-background-color: derive(#f4f4f4, -25%);
     -fx-effect: innershadow(one-pass-box, #f4f4f4, 5, 0.2, 0.0, 0.0)
 }
@@ -156,7 +156,7 @@
     -fx-background-color: derive(#6536a3, -15%);
 }
 
-.button.operation:pressed {
+.button.operation:pressed, .button.operation:armed {
     -fx-background-color: derive(#6536a3, -25%);
     -fx-effect: innershadow(one-pass-box, #9155e1, 5, 0.2, 0.0, 0.0)
 }
@@ -171,7 +171,7 @@
     -fx-background-color: derive(#e62e89, -15%);
 }
 
-.button.equality:pressed {
+.button.equality:pressed, .button.equality:armed {
     -fx-background-color: derive(#e62e89, -25%);
     -fx-effect: innershadow(one-pass-box, #e62e89, 5, 0.2, 0.0, 0.0)
 }
