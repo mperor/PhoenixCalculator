@@ -12,32 +12,32 @@
         <Label fx:id="lblResult" styleClass="result" text="0"/>
     </VBox>
 
-    <Button text="\%" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" onAction="#doPercent"/>
-    <Button text="+/-" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#changeSign"/>
-    <Button text="C" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="2" onAction="#clean"/>
-    <Button text="/" focusTraversable="false" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#doOperation"/>
+    <Button text="\%" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" onAction="#handlePercentPressed"/>
+    <Button text="+/-" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#handleChangeSign"/>
+    <Button text="C" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="2" onAction="#handleReset"/>
+    <Button text="/" focusTraversable="false" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="7" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" onAction="#concatNumber"/>
-    <Button text="8" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#concatNumber"/>
-    <Button text="9" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="2" onAction="#concatNumber"/>
-    <Button text="x" focusTraversable="false" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="3" onAction="#doOperation"/>
+    <Button text="7" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" onAction="#handleNumberPressed"/>
+    <Button text="8" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#handleNumberPressed"/>
+    <Button text="9" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="2" onAction="#handleNumberPressed"/>
+    <Button text="x" focusTraversable="false" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="4" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" onAction="#concatNumber"/>
-    <Button text="5" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#concatNumber"/>
-    <Button text="6" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="2" onAction="#concatNumber"/>
+    <Button text="4" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" onAction="#handleNumberPressed"/>
+    <Button text="5" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#handleNumberPressed"/>
+    <Button text="6" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="2" onAction="#handleNumberPressed"/>
     <Button text="-" focusTraversable="false" style="-fx-font-size: 38px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="3"
-            GridPane.columnIndex="3" onAction="#doOperation"/>
+            GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="1" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" onAction="#concatNumber"/>
-    <Button text="2" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="1" onAction="#concatNumber"/>
-    <Button text="3" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="2" onAction="#concatNumber"/>
+    <Button text="1" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" onAction="#handleNumberPressed"/>
+    <Button text="2" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="1" onAction="#handleNumberPressed"/>
+    <Button text="3" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="2" onAction="#handleNumberPressed"/>
     <Button text="+" focusTraversable="false" style="-fx-font-size: 28px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="4"
-            GridPane.columnIndex="3" onAction="#doOperation"/>
+            GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="0" focusTraversable="false" style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" GridPane.rowIndex="5" onAction="#concatNumber"/>
-    <Button text="," focusTraversable="false" style="-fx-font-size: 35px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#addComma"/>
+    <Button text="0" focusTraversable="false" style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" GridPane.rowIndex="5" onAction="#handleNumberPressed"/>
+    <Button text="," focusTraversable="false" style="-fx-font-size: 35px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#handleCommaPressed"/>
     <Button text="=" style="-fx-font-size: 35px;" styleClass="equality" prefWidth="Infinity" GridPane.rowIndex="5"
-            GridPane.columnIndex="2" GridPane.columnSpan="2" onAction="#calculateResult"/>
+            GridPane.columnIndex="2" GridPane.columnSpan="2" onAction="#handleShowResult"/>
 
     <columnConstraints>
         <ColumnConstraints percentWidth="25"/>
