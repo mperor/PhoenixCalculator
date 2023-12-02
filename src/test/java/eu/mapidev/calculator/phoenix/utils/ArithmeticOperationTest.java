@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ArithmeticOperationTest {
 
     @Test
-    public void shouldAllowToGetFunctionByArithmeticOperationAndCalculateResult() {
+    void shouldAllowToGetFunctionByArithmeticOperationAndCalculateResult() {
         assertEquals(BigDecimal.valueOf(2), ArithmeticOperation.ADD.getOperation().apply(BigDecimal.ONE, BigDecimal.ONE));
         assertEquals(BigDecimal.ZERO, ArithmeticOperation.SUBTRACT.getOperation().apply(BigDecimal.ONE, BigDecimal.ONE));
         assertEquals(BigDecimal.TEN, ArithmeticOperation.MULTIPLY.getOperation().apply(BigDecimal.ONE, BigDecimal.TEN));

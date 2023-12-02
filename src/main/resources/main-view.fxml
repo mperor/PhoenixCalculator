@@ -17,24 +17,24 @@
     <Button text="C" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="2" onAction="#handleReset"/>
     <Button text="/" focusTraversable="false" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="7" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" onAction="#handleNumberPressed"/>
-    <Button text="8" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#handleNumberPressed"/>
-    <Button text="9" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="2" onAction="#handleNumberPressed"/>
+    <Button text="7" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" onAction="#handleDigitPressed"/>
+    <Button text="8" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#handleDigitPressed"/>
+    <Button text="9" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="2" onAction="#handleDigitPressed"/>
     <Button text="x" focusTraversable="false" style="-fx-font-size: 22px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="4" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" onAction="#handleNumberPressed"/>
-    <Button text="5" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#handleNumberPressed"/>
-    <Button text="6" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="2" onAction="#handleNumberPressed"/>
+    <Button text="4" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" onAction="#handleDigitPressed"/>
+    <Button text="5" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#handleDigitPressed"/>
+    <Button text="6" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="2" onAction="#handleDigitPressed"/>
     <Button text="-" focusTraversable="false" style="-fx-font-size: 38px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="3"
             GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="1" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" onAction="#handleNumberPressed"/>
-    <Button text="2" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="1" onAction="#handleNumberPressed"/>
-    <Button text="3" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="2" onAction="#handleNumberPressed"/>
+    <Button text="1" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" onAction="#handleDigitPressed"/>
+    <Button text="2" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="1" onAction="#handleDigitPressed"/>
+    <Button text="3" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="4" GridPane.columnIndex="2" onAction="#handleDigitPressed"/>
     <Button text="+" focusTraversable="false" style="-fx-font-size: 28px;" styleClass="operation" prefWidth="Infinity" GridPane.rowIndex="4"
             GridPane.columnIndex="3" onAction="#handleArithmeticOperation"/>
 
-    <Button text="0" focusTraversable="false" style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" GridPane.rowIndex="5" onAction="#handleNumberPressed"/>
+    <Button text="0" focusTraversable="false" style="-fx-background-radius: 0 0 0 5;" prefWidth="Infinity" GridPane.rowIndex="5" onAction="#handleDigitPressed"/>
     <Button text="," focusTraversable="false" style="-fx-font-size: 35px;" prefWidth="Infinity" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#handleCommaPressed"/>
     <Button text="=" style="-fx-font-size: 35px;" styleClass="equality" prefWidth="Infinity" GridPane.rowIndex="5"
             GridPane.columnIndex="2" GridPane.columnSpan="2" onAction="#handleShowResult"/>

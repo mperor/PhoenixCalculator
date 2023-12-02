@@ -15,18 +15,21 @@ public class ApplicationLauncher extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         ClassLoader classLoader = ApplicationLauncher.class.getClassLoader();
-        FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+
         primaryStage.setTitle("Phoenix Calculator");
-        scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setScene(scene);
         Image icon = new Image(classLoader.getResourceAsStream("img/icon.png"));
         primaryStage.getIcons().add(icon);
-        primaryStage.show();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.setScene(scene);
 
         MainController controller = fxmlLoader.getController();
         controller.setPrimaryStage(primaryStage);
+
+        primaryStage.show();
     }
 
     @Override
