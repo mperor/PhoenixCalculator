@@ -89,6 +89,15 @@ class BasicCalculatorEngineTest {
     }
 
     @Test
+    void testInputMoreDigitsThanLimit_returnsNumberWithMaxInputDigits() {
+        engine.inputDigits(_1, _2, _3, _4, _5, _6, _7, _8, _9, _0, _1, _2, _3, _4, _5, _6, _7, _8);
+        assertResultEquals("1234567890123456");
+
+        engine.reset().inputDigit(_0).addComma().inputDigits(_1, _2, _3, _4, _5, _6, _7, _8, _9, _0, _1, _2, _3, _4, _5, _6, _7);
+        assertResultEquals("0,123456789012345");
+    }
+
+    @Test
     void testDivideByZero_returnsErrorResult() {
         engine.inputDigit(_1).divide().inputDigit(_0).calculateResult();
         assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
