@@ -1,7 +1,6 @@
 package eu.mapidev.calculator.phoenix.engine;
 
-import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.engine.CalculatorDigit;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -69,39 +68,26 @@ class CalculatorScenarioTest {
             1 / 0 = , 5                               | 0,5                | ''
 
             # clear
+            C                                         | 0                  | ''
             1 + 2 = C                                 | 0                  | ''
+            1 + 2 C 3 =                               | 3                  | '3 = '
             """)
     void shouldShowResultAndMemoryAfterKeys(String keys, String expectedResult, String expectedMemory) {
-        var calculator = new KeyPressingCalculator();
+        var state = CalculatorState.initial();
         for (String key : keys.trim().split("\\s+"))
-            calculator.press(key);
+            state = CalculatorEngine.apply(state, CalculatorInput.fromToken(key));
 
+        var finalState = state;
         assertAll(
-                () -> assertEquals(expectedResult, calculator.result, "result"),
-                () -> assertEquals(expectedMemory, calculator.memory, "memory"));
+                () -> assertEquals(expectedResult, finalState.display(), "result"),
+                () -> assertEquals(expectedMemory, finalState.memory(), "memory"));
     }
 
-    private static class KeyPressingCalculator {
-        private final CalculatorEngine engine = new CalculatorEngine();
-        private String result;
-        private String memory;
+    @Test
+    void shouldStartWithZeroAndEmptyMemory() {
+        var state = CalculatorState.initial();
 
-        KeyPressingCalculator() {
-            engine.setOnResultChanged(text -> result = text);
-            engine.setOnMemoryChanged(text -> memory = text);
-        }
-
-        void press(String key) {
-            switch (key) {
-                case "," -> engine.addComma();
-                case "%" -> engine.doPercent();
-                case "+/-" -> engine.changeSign();
-                case "=" -> engine.calculateResult();
-                case "C" -> engine.reset();
-                default -> CalculatorDigit.fromString(key).ifPresentOrElse(engine::inputDigit,
-                        () -> engine.doOperation(ArithmeticOperation.findBySign(key).orElseThrow(
-                                () -> new IllegalArgumentException("Unknown key: " + key))));
-            }
-        }
+        assertEquals("0", state.display());
+        assertEquals("", state.memory());
     }
 }
