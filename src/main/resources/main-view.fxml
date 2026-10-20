@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <GridPane fx:id="root" prefHeight="590" prefWidth="370" styleClass="content,calculator" stylesheets="@css/style.css"
-          xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.2"
+          xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25"
           fx:controller="eu.mapidev.calculator.phoenix.MainController">
 
     <VBox prefHeight="140" styleClass="top" GridPane.columnSpan="4">
