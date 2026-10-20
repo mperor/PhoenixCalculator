@@ -147,6 +147,37 @@
     -fx-font-family: 'Lato Light';
 }
 
+.calculator .button.window-button {
+    -fx-pref-height: 32px;
+    -fx-pref-width: 44px;
+    -fx-padding: 0;
+    -fx-font-size: 18px;
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+}
+
+.calculator .button.window-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: white;
+}
+
+.calculator .button.window-button:pressed, .calculator .button.window-button:armed {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-effect: null;
+}
+
+.calculator .button.window-button.close {
+    -fx-background-radius: 0 5 0 0;
+}
+
+.calculator .button.window-button.close:hover {
+    -fx-background-color: #e62e89;
+}
+
+.calculator .button.window-button.close:pressed, .calculator .button.window-button.close:armed {
+    -fx-background-color: derive(#e62e89, -25%);
+}
+
 .button.operation {
     -fx-background-color: linear-gradient(to bottom right, #9155e1, #6536a3);
     -fx-text-fill: white;

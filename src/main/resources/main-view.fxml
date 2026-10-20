@@ -7,10 +7,17 @@
           xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25"
           fx:controller="eu.mapidev.calculator.phoenix.MainController">
 
-    <VBox prefHeight="140" styleClass="top" GridPane.columnSpan="4">
-        <Label fx:id="lblMemory" styleClass="memory" text="0"/>
-        <Label fx:id="lblResult" styleClass="result" text="0"/>
-    </VBox>
+    <StackPane GridPane.columnSpan="4">
+        <VBox prefHeight="140" styleClass="top">
+            <Label fx:id="lblMemory" styleClass="memory" text="0"/>
+            <Label fx:id="lblResult" styleClass="result" text="0"/>
+        </VBox>
+        <!-- Not direct GridPane children, so they stay out of the keyboard bindings -->
+        <HBox StackPane.alignment="TOP_RIGHT" maxWidth="-Infinity" maxHeight="-Infinity">
+            <Button text="–" focusTraversable="false" styleClass="window-button" onAction="#handleMinimize"/>
+            <Button text="×" focusTraversable="false" styleClass="window-button,close" onAction="#handleClose"/>
+        </HBox>
+    </StackPane>
 
     <Button text="\%" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" onAction="#handlePercentPressed"/>
     <Button text="+/-" focusTraversable="false" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#handleChangeSign"/>
