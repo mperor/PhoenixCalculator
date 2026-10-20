@@ -1,13 +1,13 @@
-package eu.mapidev.calculator.phoenix.logic;
+package eu.mapidev.calculator.phoenix.engine;
 
-import eu.mapidev.calculator.phoenix.utils.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.utils.CalculatorDigit;
+import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
+import eu.mapidev.calculator.phoenix.engine.CalculatorDigit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static eu.mapidev.calculator.phoenix.utils.ArithmeticOperation.ADD;
-import static eu.mapidev.calculator.phoenix.utils.CalculatorDigit.*;
+import static eu.mapidev.calculator.phoenix.engine.ArithmeticOperation.ADD;
+import static eu.mapidev.calculator.phoenix.engine.CalculatorDigit.*;
 
 class BasicCalculatorEngineTest {
 

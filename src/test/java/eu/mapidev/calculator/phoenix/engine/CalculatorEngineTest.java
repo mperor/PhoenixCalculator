@@ -1,12 +1,12 @@
-package eu.mapidev.calculator.phoenix.logic;
+package eu.mapidev.calculator.phoenix.engine;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static eu.mapidev.calculator.phoenix.utils.ArithmeticOperation.ADD;
-import static eu.mapidev.calculator.phoenix.utils.ArithmeticOperation.DIVIDE;
-import static eu.mapidev.calculator.phoenix.utils.CalculatorDigit.*;
+import static eu.mapidev.calculator.phoenix.engine.ArithmeticOperation.ADD;
+import static eu.mapidev.calculator.phoenix.engine.ArithmeticOperation.DIVIDE;
+import static eu.mapidev.calculator.phoenix.engine.CalculatorDigit.*;
 
 class CalculatorEngineTest {
 

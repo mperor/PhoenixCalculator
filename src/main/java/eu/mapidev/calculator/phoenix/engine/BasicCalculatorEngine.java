@@ -1,8 +1,8 @@
-package eu.mapidev.calculator.phoenix.logic;
+package eu.mapidev.calculator.phoenix.engine;
 
-import eu.mapidev.calculator.phoenix.utils.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.utils.CalculatorDigit;
-import eu.mapidev.calculator.phoenix.utils.ResultUtils;
+import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
+import eu.mapidev.calculator.phoenix.engine.CalculatorDigit;
+import eu.mapidev.calculator.phoenix.engine.DisplayFormat;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -65,16 +65,16 @@ public class BasicCalculatorEngine {
 
     public BasicCalculatorEngine addComma() {
         if (calledCalculatorOption != CalledCalculatorOption.INPUT_NUMBER) {
-            lblResult.setText(DEFAULT_RESULT + ResultUtils.COMMA);
+            lblResult.setText(DEFAULT_RESULT + DisplayFormat.COMMA);
             calledCalculatorOption = CalledCalculatorOption.INPUT_NUMBER;
             return this;
         }
 
         String result = lblResult.getText();
-        if (result.contains(ResultUtils.COMMA))
+        if (result.contains(DisplayFormat.COMMA))
             return this;
 
-        lblResult.setText(result + ResultUtils.COMMA);
+        lblResult.setText(result + DisplayFormat.COMMA);
         calledCalculatorOption = CalledCalculatorOption.INPUT_NUMBER;
         return this;
     }
@@ -84,11 +84,11 @@ public class BasicCalculatorEngine {
             return this;
 
         String result = lblResult.getText();
-        BigDecimal decimalResult = ResultUtils.safeConvertStringToBigDecimal(result);
+        BigDecimal decimalResult = DisplayFormat.parse(result);
 
         storedOperation.filter(operation -> EnumSet.of(ArithmeticOperation.ADD, ArithmeticOperation.SUBTRACT).contains(operation))
-                .ifPresentOrElse(arithmeticOperation -> lblResult.setText(ResultUtils.convertBigDecimalToString(storedResult.multiply(decimalResult.divide(BigDecimal.valueOf(100))))),
-                        () -> lblResult.setText(ResultUtils.convertBigDecimalToString(decimalResult.divide(BigDecimal.valueOf(100)))));
+                .ifPresentOrElse(arithmeticOperation -> lblResult.setText(DisplayFormat.format(storedResult.multiply(decimalResult.divide(BigDecimal.valueOf(100))))),
+                        () -> lblResult.setText(DisplayFormat.format(decimalResult.divide(BigDecimal.valueOf(100)))));
 
         calledCalculatorOption = CalledCalculatorOption.INPUT_NUMBER;
         return this;
@@ -117,7 +117,7 @@ public class BasicCalculatorEngine {
         if (isError())
             return this;
 
-        BigDecimal decimal = ResultUtils.safeConvertStringToBigDecimal(lblResult.getText());
+        BigDecimal decimal = DisplayFormat.parse(lblResult.getText());
         BigDecimal result;
         try {
             result = storedOperation.filter(stored -> calledCalculatorOption == CalledCalculatorOption.INPUT_NUMBER)
@@ -128,7 +128,7 @@ public class BasicCalculatorEngine {
             return showError();
         }
 
-        lblResult.setText(ResultUtils.convertBigDecimalToString(result));
+        lblResult.setText(DisplayFormat.format(result));
         storedOperation = Optional.of(operation);
         storedResult = result;
 
@@ -140,7 +140,7 @@ public class BasicCalculatorEngine {
         if (isError())
             return this;
 
-        var currentResult = ResultUtils.safeConvertStringToBigDecimal(lblResult.getText());
+        var currentResult = DisplayFormat.parse(lblResult.getText());
         if (calledCalculatorOption != CalledCalculatorOption.CALCULATE_RESULT) {
             storedFactor = currentResult;
         }
@@ -154,7 +154,7 @@ public class BasicCalculatorEngine {
             return showError();
         }
 
-        lblResult.setText(ResultUtils.convertBigDecimalToString(result));
+        lblResult.setText(DisplayFormat.format(result));
         storedResult = result;
 
         calledCalculatorOption = CalledCalculatorOption.CALCULATE_RESULT;

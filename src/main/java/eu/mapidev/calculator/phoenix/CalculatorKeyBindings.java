@@ -1,4 +1,4 @@
-package eu.mapidev.calculator.phoenix.utils;
+package eu.mapidev.calculator.phoenix;
 
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
@@ -8,7 +8,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
-import static eu.mapidev.calculator.phoenix.utils.ArithmeticOperation.*;
+import static eu.mapidev.calculator.phoenix.engine.ArithmeticOperation.*;
 
 public class CalculatorKeyBindings {
 

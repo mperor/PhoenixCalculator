@@ -1,7 +1,7 @@
-package eu.mapidev.calculator.phoenix.logic;
+package eu.mapidev.calculator.phoenix.engine;
 
-import eu.mapidev.calculator.phoenix.utils.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.utils.CalculatorDigit;
+import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
+import eu.mapidev.calculator.phoenix.engine.CalculatorDigit;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

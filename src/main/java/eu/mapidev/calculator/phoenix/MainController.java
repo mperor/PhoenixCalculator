@@ -1,9 +1,9 @@
 package eu.mapidev.calculator.phoenix;
 
-import eu.mapidev.calculator.phoenix.logic.CalculatorEngine;
-import eu.mapidev.calculator.phoenix.utils.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.utils.CalculatorDigit;
-import eu.mapidev.calculator.phoenix.utils.CalculatorKeyBindings;
+import eu.mapidev.calculator.phoenix.engine.CalculatorEngine;
+import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
+import eu.mapidev.calculator.phoenix.engine.CalculatorDigit;
+import eu.mapidev.calculator.phoenix.CalculatorKeyBindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

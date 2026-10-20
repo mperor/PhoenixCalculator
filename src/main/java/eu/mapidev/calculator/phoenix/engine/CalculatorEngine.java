@@ -1,7 +1,7 @@
-package eu.mapidev.calculator.phoenix.logic;
+package eu.mapidev.calculator.phoenix.engine;
 
-import eu.mapidev.calculator.phoenix.utils.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.utils.ResultUtils;
+import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
+import eu.mapidev.calculator.phoenix.engine.DisplayFormat;
 
 import java.math.BigDecimal;
 import java.util.function.Consumer;
@@ -27,7 +27,7 @@ public class CalculatorEngine extends BasicCalculatorEngine {
         if (isError())
             return this;
 
-        lblMemory.setText(String.format("%s %s", ResultUtils.convertBigDecimalToString(storedResult), operation.getSign()));
+        lblMemory.setText(String.format("%s %s", DisplayFormat.format(storedResult), operation.getSign()));
         return this;
     }
 
@@ -43,8 +43,8 @@ public class CalculatorEngine extends BasicCalculatorEngine {
             return this;
         }
 
-        lblMemory.setText(String.format("%s %s %s =", ResultUtils.convertBigDecimalToString(leftOperand),
-                storedOperation.get().getSign(), ResultUtils.convertBigDecimalToString(storedFactor)));
+        lblMemory.setText(String.format("%s %s %s =", DisplayFormat.format(leftOperand),
+                storedOperation.get().getSign(), DisplayFormat.format(storedFactor)));
         return this;
     }
 }
