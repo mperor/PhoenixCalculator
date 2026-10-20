@@ -24,9 +24,9 @@ class CalculatorScenarioTest {
             # comma
             1 , 0 0 1                                 | 1,001              | ''
             , 1 0 0                                   | 0,100              | ''
-            , 1 0 0 =                                 | 0,1                | '0,1 = '
+            , 1 0 0 =                                 | 0,1                | 0,1 =
             , , 0                                     | 0,0                | ''
-            , , 0 =                                   | 0                  | '0 = '
+            , , 0 =                                   | 0                  | 0 =
 
             # arithmetic
             2 + 2 =                                   | 4                  | 2 + 2 =
@@ -70,7 +70,7 @@ class CalculatorScenarioTest {
             # clear
             C                                         | 0                  | ''
             1 + 2 = C                                 | 0                  | ''
-            1 + 2 C 3 =                               | 3                  | '3 = '
+            1 + 2 C 3 =                               | 3                  | 3 =
             """)
     void shouldShowResultAndMemoryAfterKeys(String keys, String expectedResult, String expectedMemory) {
         var state = CalculatorState.initial();

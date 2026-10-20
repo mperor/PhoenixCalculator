@@ -101,7 +101,7 @@ public final class CalculatorEngine {
 
         if (operation == null) {
             String display = DisplayFormat.format(value);
-            return new CalculatorState(display, display + " = ", value, null, repeatOperand, LastInput.RESULT);
+            return new CalculatorState(display, display + " =", value, null, repeatOperand, LastInput.RESULT);
         }
 
         return calculate(operation, state.accumulator(), repeatOperand).map(result -> {
