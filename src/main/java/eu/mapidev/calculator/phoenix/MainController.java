@@ -50,9 +50,14 @@ public class MainController implements Initializable {
                 .flatMap(node -> node instanceof Button button ? Stream.of(button) : Stream.empty())
                 .collect(Collectors.toMap(MainController::inputOf, Function.identity()));
 
-        root.setOnKeyPressed(keyEvent -> CalculatorKeyBindings.findInputByEvent(keyEvent)
-                .map(buttonsByInput::get)
-                .ifPresent(CalculatorKeyBindings::fireWithClickAnimation));
+        // Fire the matching button for its click animation; keyboard-only inputs (e.g. backspace) go straight to the view model
+        root.setOnKeyPressed(keyEvent -> CalculatorKeyBindings.findInputByEvent(keyEvent).ifPresent(input -> {
+            var button = buttonsByInput.get(input);
+            if (button != null)
+                CalculatorKeyBindings.fireWithClickAnimation(button);
+            else
+                viewModel.accept(input);
+        }));
 
         lblResult.textProperty().bind(viewModel.resultProperty());
         lblMemory.textProperty().bind(viewModel.memoryProperty());

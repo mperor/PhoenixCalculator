@@ -32,6 +32,7 @@ public final class CalculatorEngine {
             case Command.PERCENT -> applyPercent(state);
             case Command.EQUALS -> calculateResult(state);
             case Command.CLEAR -> CalculatorState.initial();
+            case Command.BACKSPACE -> deleteLastCharacter(state);
         };
     }
 
@@ -60,6 +61,16 @@ public final class CalculatorEngine {
             return state;
 
         return state.withTypedNumber(display + DisplayFormat.COMMA);
+    }
+
+    // Only edits a number being typed; results and operations are left untouched
+    private static CalculatorState deleteLastCharacter(CalculatorState state) {
+        if (state.lastInput() != LastInput.NUMBER)
+            return state;
+
+        String display = state.display().substring(0, state.display().length() - 1);
+        boolean nothingLeft = display.isEmpty() || display.equals("-");
+        return state.withTypedNumber(nothingLeft ? DEFAULT_DISPLAY : display);
     }
 
     private static CalculatorState changeSign(CalculatorState state) {

@@ -40,6 +40,7 @@ class CalculatorKeyBindingsTest {
             NUMBER_SIGN | false | false | +/-
             DELETE      | false | false | C
             ESCAPE      | false | false | C
+            BACK_SPACE  | false | false | ⌫
             A           | false | false |
             SPACE       | false | false |
             """)

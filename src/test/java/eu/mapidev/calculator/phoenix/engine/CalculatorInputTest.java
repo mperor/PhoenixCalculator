@@ -26,6 +26,7 @@ class CalculatorInputTest {
             %   | PERCENT
             =   | EQUALS
             C   | CLEAR
+            ⌫   | BACKSPACE
             """)
     void shouldFindInputByToken(String token, String expectedName) {
         assertEquals(expectedName, ((Enum<?>) CalculatorInput.fromToken(token)).name());
