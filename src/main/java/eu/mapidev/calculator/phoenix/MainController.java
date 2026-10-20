@@ -29,18 +29,22 @@ public class MainController implements Initializable {
 
     private Stage primaryStage;
     private CalculatorEngine calculatorEngine;
+    private double dragOffsetX;
+    private double dragOffsetY;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         root.setOnMousePressed(pressEvent -> {
-            root.setOnMouseDragged(dragEvent -> {
-                if (primaryStage == null)
-                    return;
+            dragOffsetX = pressEvent.getSceneX();
+            dragOffsetY = pressEvent.getSceneY();
+        });
+        root.setOnMouseDragged(dragEvent -> {
+            if (primaryStage == null)
+                return;
 
-                primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
-                primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
-            });
+            primaryStage.setX(dragEvent.getScreenX() - dragOffsetX);
+            primaryStage.setY(dragEvent.getScreenY() - dragOffsetY);
         });
 
         var buttonsByTextName = root.getChildren().stream()
@@ -61,6 +65,16 @@ public class MainController implements Initializable {
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    @FXML
+    public void handleMinimize(ActionEvent actionEvent) {
+        primaryStage.setIconified(true);
+    }
+
+    @FXML
+    public void handleClose(ActionEvent actionEvent) {
+        primaryStage.close();
     }
 
     @FXML
