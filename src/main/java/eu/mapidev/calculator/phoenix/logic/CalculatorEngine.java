@@ -24,6 +24,9 @@ public class CalculatorEngine extends BasicCalculatorEngine {
     @Override
     public CalculatorEngine doOperation(ArithmeticOperation operation) {
         super.doOperation(operation);
+        if (isError())
+            return this;
+
         lblMemory.setText(String.format("%s %s", ResultUtils.convertBigDecimalToString(storedResult), operation.getSign()));
         return this;
     }
@@ -32,6 +35,9 @@ public class CalculatorEngine extends BasicCalculatorEngine {
     public CalculatorEngine calculateResult() {
         BigDecimal leftOperand = storedResult;
         super.calculateResult();
+        if (isError())
+            return this;
+
         if (storedOperation.isEmpty()) {
             lblMemory.setText(String.format("%s = ", lblResult.getText()));
             return this;

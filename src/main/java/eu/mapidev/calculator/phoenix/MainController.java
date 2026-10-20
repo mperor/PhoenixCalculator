@@ -97,19 +97,11 @@ public class MainController implements Initializable {
         ArithmeticOperation operation = ArithmeticOperation.findBySign(operationSign)
                 .orElseThrow(IllegalArgumentException::new);
 
-        tryCatchArithmeticException(() -> calculatorEngine.doOperation(operation));
+        calculatorEngine.doOperation(operation);
     }
 
     @FXML
     public void handleShowResult(ActionEvent actionEvent) {
-        tryCatchArithmeticException(() -> calculatorEngine.calculateResult());
-    }
-
-    private void tryCatchArithmeticException(Runnable runnable) {
-        try {
-            runnable.run();
-        } catch (ArithmeticException e) {
-            lblResult.setText("undefined");
-        }
+        calculatorEngine.calculateResult();
     }
 }

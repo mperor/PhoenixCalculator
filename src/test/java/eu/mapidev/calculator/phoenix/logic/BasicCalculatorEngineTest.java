@@ -88,6 +88,45 @@ class BasicCalculatorEngineTest {
         assertResultEquals("1");
     }
 
+    @Test
+    void testDivideByZero_returnsErrorResult() {
+        engine.inputDigit(_1).divide().inputDigit(_0).calculateResult();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+
+        engine.reset().inputDigit(_1).divide().inputDigit(_0).add();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+
+        engine.reset().inputDigit(_0).divide().inputDigit(_0).calculateResult();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+    }
+
+    @Test
+    void testOperationsAfterDivideByZero_areIgnored() {
+        engine.inputDigit(_1).divide().inputDigit(_0).calculateResult();
+
+        engine.changeSign();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+        engine.doPercent();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+        engine.calculateResult();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+        engine.add();
+        assertResultEquals(BasicCalculatorEngine.ERROR_RESULT);
+    }
+
+    @Test
+    void testInputAfterDivideByZero_startsNewCalculation() {
+        engine.inputDigit(_1).divide().inputDigit(_0).calculateResult();
+        engine.inputDigit(_5);
+        assertResultEquals("5");
+        engine.add().inputDigit(_2).calculateResult();
+        assertResultEquals("7");
+
+        engine.reset().inputDigit(_1).divide().inputDigit(_0).calculateResult();
+        engine.addComma().inputDigit(_5);
+        assertResultEquals("0,5");
+    }
+
     private void assertResultEquals(String expected) {
         System.out.print(" ⇒ " + actualResult);
         Assertions.assertEquals(expected, actualResult);

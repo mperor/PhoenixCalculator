@@ -12,6 +12,7 @@ import java.util.function.Consumer;
 
 public class BasicCalculatorEngine {
     public static final String DEFAULT_RESULT = "0";
+    public static final String ERROR_RESULT = "undefined";
 
     protected Label lblResult = new Label(DEFAULT_RESULT);
     protected Optional<ArithmeticOperation> storedOperation = Optional.empty();
@@ -41,7 +42,7 @@ public class BasicCalculatorEngine {
 
     public BasicCalculatorEngine changeSign() {
         String result = lblResult.getText();
-        if (DEFAULT_RESULT.equals(result))
+        if (DEFAULT_RESULT.equals(result) || isError())
             return this;
 
         lblResult.setText(result.startsWith("-") ? result.substring(1) : "-" + result);
@@ -77,6 +78,9 @@ public class BasicCalculatorEngine {
     }
 
     public BasicCalculatorEngine doPercent() {
+        if (isError())
+            return this;
+
         String result = lblResult.getText();
         BigDecimal decimalResult = ResultUtils.safeConvertStringToBigDecimal(result);
 
@@ -108,11 +112,19 @@ public class BasicCalculatorEngine {
     }
 
     public BasicCalculatorEngine doOperation(ArithmeticOperation operation) {
+        if (isError())
+            return this;
+
         BigDecimal decimal = ResultUtils.safeConvertStringToBigDecimal(lblResult.getText());
-        var result = storedOperation.filter(stored -> calledCalculatorOption == CalledCalculatorOption.INPUT_NUMBER)
-                .map(ArithmeticOperation::getOperation)
-                .map(bigDecimalBinaryOperator -> bigDecimalBinaryOperator.apply(storedResult, decimal))
-                .orElse(decimal);
+        BigDecimal result;
+        try {
+            result = storedOperation.filter(stored -> calledCalculatorOption == CalledCalculatorOption.INPUT_NUMBER)
+                    .map(ArithmeticOperation::getOperation)
+                    .map(bigDecimalBinaryOperator -> bigDecimalBinaryOperator.apply(storedResult, decimal))
+                    .orElse(decimal);
+        } catch (ArithmeticException e) {
+            return showError();
+        }
 
         lblResult.setText(ResultUtils.convertBigDecimalToString(result));
         storedOperation = Optional.of(operation);
@@ -123,14 +135,22 @@ public class BasicCalculatorEngine {
     }
 
     public BasicCalculatorEngine calculateResult() {
+        if (isError())
+            return this;
+
         var currentResult = ResultUtils.safeConvertStringToBigDecimal(lblResult.getText());
         if (calledCalculatorOption != CalledCalculatorOption.CALCULATE_RESULT) {
             storedFactor = currentResult;
         }
 
-        var result = storedOperation.map(ArithmeticOperation::getOperation)
-                .map(bigDecimalBinaryOperator -> bigDecimalBinaryOperator.apply(storedResult, storedFactor))
-                .orElse(currentResult);
+        BigDecimal result;
+        try {
+            result = storedOperation.map(ArithmeticOperation::getOperation)
+                    .map(bigDecimalBinaryOperator -> bigDecimalBinaryOperator.apply(storedResult, storedFactor))
+                    .orElse(currentResult);
+        } catch (ArithmeticException e) {
+            return showError();
+        }
 
         lblResult.setText(ResultUtils.convertBigDecimalToString(result));
         storedResult = result;
@@ -139,11 +159,24 @@ public class BasicCalculatorEngine {
         return this;
     }
 
+    protected boolean isError() {
+        return calledCalculatorOption == CalledCalculatorOption.ERROR;
+    }
+
+    // Clears the calculation and shows ERROR_RESULT; only digits, comma and reset are accepted until a new number starts
+    private BasicCalculatorEngine showError() {
+        reset();
+        lblResult.setText(ERROR_RESULT);
+        calledCalculatorOption = CalledCalculatorOption.ERROR;
+        return this;
+    }
+
     protected enum CalledCalculatorOption {
         INPUT_NUMBER,
         SET_OPERATION,
         CALCULATE_RESULT,
-        RESET
+        RESET,
+        ERROR
     }
 
     protected static class Label {

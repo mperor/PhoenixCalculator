@@ -82,6 +82,17 @@ class CalculatorEngineTest {
         Assertions.assertEquals("100000000 +", actualMemory);
     }
 
+    @Test
+    void testDivideByZero_returnsErrorResultAndEmptyMemory() {
+        engine.inputDigit(_1).doOperation(DIVIDE).inputDigit(_0).calculateResult();
+        Assertions.assertEquals(BasicCalculatorEngine.ERROR_RESULT, actualResult);
+        Assertions.assertEquals("", actualMemory);
+
+        engine.reset().inputDigit(_1).doOperation(DIVIDE).inputDigit(_0).doOperation(ADD);
+        Assertions.assertEquals(BasicCalculatorEngine.ERROR_RESULT, actualResult);
+        Assertions.assertEquals("", actualMemory);
+    }
+
     void assertResultEqualsZeroAndMemoryIsEmpty() {
         Assertions.assertEquals("0", actualResult);
         Assertions.assertEquals("", actualMemory);
