@@ -1,14 +1,10 @@
 package eu.mapidev.calculator.phoenix.engine;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ArithmeticOperationTest {
 
@@ -29,15 +25,4 @@ class ArithmeticOperationTest {
         assertEquals(new BigDecimal("9.999999999999998E+31"),
                 ArithmeticOperation.MULTIPLY.getOperation().apply(new BigDecimal("9999999999999999"), new BigDecimal("9999999999999999")));
     }
-
-    @Test
-    void shouldAllowArithmeticOperationToFindBySign() {
-        assertEquals(ArithmeticOperation.ADD, ArithmeticOperation.findBySign("+").get());
-        assertEquals(ArithmeticOperation.SUBTRACT, ArithmeticOperation.findBySign("-").get());
-        assertEquals(ArithmeticOperation.MULTIPLY, ArithmeticOperation.findBySign("x").get());
-        assertEquals(ArithmeticOperation.DIVIDE, ArithmeticOperation.findBySign("/").get());
-        assertEquals(Optional.empty(), ArithmeticOperation.findBySign("."));
-        assertThrows(NoSuchElementException.class, () -> ArithmeticOperation.findBySign(".").get());
-    }
-
 }

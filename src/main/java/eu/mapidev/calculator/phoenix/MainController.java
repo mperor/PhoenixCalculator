@@ -1,9 +1,9 @@
 package eu.mapidev.calculator.phoenix;
 
 import eu.mapidev.calculator.phoenix.engine.CalculatorEngine;
-import eu.mapidev.calculator.phoenix.engine.ArithmeticOperation;
-import eu.mapidev.calculator.phoenix.engine.CalculatorDigit;
-import eu.mapidev.calculator.phoenix.CalculatorKeyBindings;
+import eu.mapidev.calculator.phoenix.engine.CalculatorInput;
+import eu.mapidev.calculator.phoenix.engine.CalculatorState;
+import eu.mapidev.calculator.phoenix.engine.Command;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +28,7 @@ public class MainController implements Initializable {
     private Label lblMemory;
 
     private Stage primaryStage;
-    private CalculatorEngine calculatorEngine;
+    private CalculatorState state = CalculatorState.initial();
     private double dragOffsetX;
     private double dragOffsetY;
 
@@ -58,9 +58,7 @@ public class MainController implements Initializable {
                 CalculatorKeyBindings.buttonFireWithClickAnimation(button);
         });
 
-        calculatorEngine = new CalculatorEngine();
-        calculatorEngine.setOnResultChanged(lblResult::setText);
-        calculatorEngine.setOnMemoryChanged(lblMemory::setText);
+        showState();
     }
 
     public void setPrimaryStage(Stage primaryStage) {
@@ -79,43 +77,46 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleDigitPressed(ActionEvent actionEvent) {
-        String buttonTextDigit = ((Button) actionEvent.getSource()).getText();
-        CalculatorDigit digit = CalculatorDigit.fromString(buttonTextDigit)
-                        .orElseThrow(IllegalArgumentException::new);
-        calculatorEngine.inputDigit(digit);
+        accept(CalculatorInput.fromToken(((Button) actionEvent.getSource()).getText()));
     }
 
     @FXML
     public void handlePercentPressed(ActionEvent actionEvent) {
-        calculatorEngine.doPercent();
+        accept(Command.PERCENT);
     }
 
     @FXML
     public void handleReset(ActionEvent actionEvent) {
-        calculatorEngine.reset();
+        accept(Command.CLEAR);
     }
 
     @FXML
     public void handleChangeSign(ActionEvent actionEvent) {
-        calculatorEngine.changeSign();
+        accept(Command.CHANGE_SIGN);
     }
 
     @FXML
     public void handleCommaPressed(ActionEvent actionEvent) {
-        calculatorEngine.addComma();
+        accept(Command.COMMA);
     }
 
     @FXML
     public void handleArithmeticOperation(ActionEvent actionEvent) {
-        String operationSign = ((Button) actionEvent.getSource()).getText();
-        ArithmeticOperation operation = ArithmeticOperation.findBySign(operationSign)
-                .orElseThrow(IllegalArgumentException::new);
-
-        calculatorEngine.doOperation(operation);
+        accept(CalculatorInput.fromToken(((Button) actionEvent.getSource()).getText()));
     }
 
     @FXML
     public void handleShowResult(ActionEvent actionEvent) {
-        calculatorEngine.calculateResult();
+        accept(Command.EQUALS);
+    }
+
+    private void accept(CalculatorInput input) {
+        state = CalculatorEngine.apply(state, input);
+        showState();
+    }
+
+    private void showState() {
+        lblResult.setText(state.display());
+        lblMemory.setText(state.memory());
     }
 }

@@ -2,11 +2,9 @@ package eu.mapidev.calculator.phoenix.engine;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.BinaryOperator;
 
-public enum ArithmeticOperation {
+public enum ArithmeticOperation implements CalculatorInput {
 
     // Results are rounded to 16 significant digits (DECIMAL64): bounded, and exact for numbers that can be typed in
     ADD("+", (decimal, augend) -> decimal.add(augend, MathContext.DECIMAL64)),
@@ -30,10 +28,9 @@ public enum ArithmeticOperation {
         return operation;
     }
 
-    public static Optional<ArithmeticOperation> findBySign(final String sign) {
-        return Arrays.stream(ArithmeticOperation.values())
-                .filter(value -> value.sign.equals(sign))
-                .findFirst();
+    @Override
+    public String token() {
+        return sign;
     }
 
 }
