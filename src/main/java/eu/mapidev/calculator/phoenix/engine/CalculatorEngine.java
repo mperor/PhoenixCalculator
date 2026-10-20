@@ -43,7 +43,7 @@ public final class CalculatorEngine {
     private static CalculatorState inputDigit(CalculatorState state, CalculatorDigit digit) {
         String display = state.display();
         if (DEFAULT_DISPLAY.equals(display) || state.lastInput() != LastInput.NUMBER)
-            return state.withTypedNumber(digit.token());
+            return startNumber(state, digit.token());
 
         if (display.chars().filter(Character::isDigit).count() >= MAX_INPUT_DIGITS)
             return state;
@@ -53,7 +53,7 @@ public final class CalculatorEngine {
 
     private static CalculatorState addComma(CalculatorState state) {
         if (state.lastInput() != LastInput.NUMBER)
-            return state.withTypedNumber(DEFAULT_DISPLAY + DisplayFormat.COMMA);
+            return startNumber(state, DEFAULT_DISPLAY + DisplayFormat.COMMA);
 
         String display = state.display();
         if (display.contains(DisplayFormat.COMMA))
@@ -70,15 +70,25 @@ public final class CalculatorEngine {
         return state.withTypedNumber(display.startsWith("-") ? display.substring(1) : "-" + display);
     }
 
-    // With a pending + or -, x% means x percent of the left operand (200 + 10% -> 20)
+    // With a pending + or -, x% means x percent of the left operand (200 + 10% -> 20);
+    // after "=" the calculation is complete, so x% is just x / 100
     private static CalculatorState applyPercent(CalculatorState state) {
         BigDecimal percent = DisplayFormat.parse(state.display()).divide(HUNDRED);
-        ArithmeticOperation operation = state.pendingOperation();
+        ArithmeticOperation operation = state.lastInput() == LastInput.RESULT ? null : state.pendingOperation();
         BigDecimal result = operation == ArithmeticOperation.ADD || operation == ArithmeticOperation.SUBTRACT
                 ? state.accumulator().multiply(percent)
                 : percent;
 
-        return state.withTypedNumber(DisplayFormat.format(result));
+        return startNumber(state, DisplayFormat.format(result));
+    }
+
+    // "=" completes the calculation: a number entered after it starts a new one, so the operation
+    // kept for repeating "=" is dropped. The memory line keeps showing the last expression.
+    private static CalculatorState startNumber(CalculatorState state, String display) {
+        if (state.lastInput() == LastInput.RESULT)
+            return new CalculatorState(display, state.memory(), BigDecimal.ZERO, null, BigDecimal.ZERO, LastInput.NUMBER);
+
+        return state.withTypedNumber(display);
     }
 
     private static CalculatorState applyOperation(CalculatorState state, ArithmeticOperation operation) {
