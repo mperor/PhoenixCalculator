@@ -67,7 +67,13 @@ public final class CalculatorEngine {
         if (DEFAULT_DISPLAY.equals(display))
             return state;
 
-        return state.withTypedNumber(display.startsWith("-") ? display.substring(1) : "-" + display);
+        String negated = display.startsWith("-") ? display.substring(1) : "-" + display;
+        // On a result, negate the result itself: the next digit still starts a new number and "=" continues from it
+        if (state.lastInput() == LastInput.RESULT)
+            return new CalculatorState(negated, state.memory(), state.accumulator().negate(),
+                    state.pendingOperation(), state.repeatOperand(), LastInput.RESULT);
+
+        return state.withTypedNumber(negated);
     }
 
     // With a pending + or -, x% means x percent of the left operand (200 + 10% -> 20);
