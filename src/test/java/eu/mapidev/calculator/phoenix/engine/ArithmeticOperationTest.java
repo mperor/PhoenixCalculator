@@ -1,4 +1,4 @@
-package eu.mapidev.calculator.phoenix.utils;
+package eu.mapidev.calculator.phoenix.engine;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

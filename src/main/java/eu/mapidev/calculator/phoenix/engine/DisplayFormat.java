@@ -1,8 +1,8 @@
-package eu.mapidev.calculator.phoenix.utils;
+package eu.mapidev.calculator.phoenix.engine;
 
 import java.math.BigDecimal;
 
-public class ResultUtils {
+public class DisplayFormat {
 
     public static final String DOT = ".";
     public static final String COMMA = ",";
@@ -11,7 +11,7 @@ public class ResultUtils {
     private static final int MIN_PLAIN_EXPONENT = -7;
     private static final int MAX_PLAIN_EXPONENT = 15;
 
-    public static BigDecimal safeConvertStringToBigDecimal(String string) {
+    public static BigDecimal parse(String string) {
         try {
             string = replaceCommaWithDot(string);
             return new BigDecimal(simplifyStringBeforeConvert(string));
@@ -20,7 +20,7 @@ public class ResultUtils {
         }
     }
 
-    public static String convertBigDecimalToString(BigDecimal bigDecimal) {
+    public static String format(BigDecimal bigDecimal) {
         BigDecimal stripped = bigDecimal.stripTrailingZeros();
         int exponent = stripped.precision() - stripped.scale() - 1;
         boolean plain = stripped.signum() == 0 || (exponent >= MIN_PLAIN_EXPONENT && exponent <= MAX_PLAIN_EXPONENT);

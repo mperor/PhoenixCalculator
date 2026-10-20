@@ -1,6 +1,6 @@
-package eu.mapidev.calculator.phoenix.utils;
+package eu.mapidev.calculator.phoenix.engine;
 
-import eu.mapidev.calculator.phoenix.logic.CalculatorEngine;
+import eu.mapidev.calculator.phoenix.engine.CalculatorEngine;
 
 import java.util.Arrays;
 import java.util.Optional;
