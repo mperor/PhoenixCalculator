@@ -21,6 +21,16 @@ class ArithmeticOperationTest {
     }
 
     @Test
+    void shouldCalculateWithSixteenSignificantDigits() {
+        assertEquals(0, new BigDecimal("12345678").compareTo(
+                ArithmeticOperation.DIVIDE.getOperation().apply(new BigDecimal("12345678"), BigDecimal.ONE)));
+        assertEquals(new BigDecimal("0.3333333333333333"),
+                ArithmeticOperation.DIVIDE.getOperation().apply(BigDecimal.ONE, new BigDecimal("3")));
+        assertEquals(new BigDecimal("9.999999999999998E+31"),
+                ArithmeticOperation.MULTIPLY.getOperation().apply(new BigDecimal("9999999999999999"), new BigDecimal("9999999999999999")));
+    }
+
+    @Test
     void shouldAllowArithmeticOperationToFindBySign() {
         assertEquals(ArithmeticOperation.ADD, ArithmeticOperation.findBySign("+").get());
         assertEquals(ArithmeticOperation.SUBTRACT, ArithmeticOperation.findBySign("-").get());

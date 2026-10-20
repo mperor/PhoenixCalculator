@@ -8,13 +8,14 @@ import java.util.function.BinaryOperator;
 
 public enum ArithmeticOperation {
 
-    ADD("+", BigDecimal::add),
-    SUBTRACT("-", BigDecimal::subtract),
-    MULTIPLY("x", BigDecimal::multiply),
-    DIVIDE("/", ArithmeticOperation::divideWithTerminating);
+    // Results are rounded to 16 significant digits (DECIMAL64): bounded, and exact for numbers that can be typed in
+    ADD("+", (decimal, augend) -> decimal.add(augend, MathContext.DECIMAL64)),
+    SUBTRACT("-", (decimal, subtrahend) -> decimal.subtract(subtrahend, MathContext.DECIMAL64)),
+    MULTIPLY("x", (decimal, multiplicand) -> decimal.multiply(multiplicand, MathContext.DECIMAL64)),
+    DIVIDE("/", (decimal, divisor) -> decimal.divide(divisor, MathContext.DECIMAL64));
 
-    private String sign;
-    private BinaryOperator<BigDecimal> operation;
+    private final String sign;
+    private final BinaryOperator<BigDecimal> operation;
 
     ArithmeticOperation(String sign, BinaryOperator<BigDecimal> operation) {
         this.sign = sign;
@@ -33,10 +34,6 @@ public enum ArithmeticOperation {
         return Arrays.stream(ArithmeticOperation.values())
                 .filter(value -> value.sign.equals(sign))
                 .findFirst();
-    }
-
-    private static BigDecimal divideWithTerminating(BigDecimal decimal, BigDecimal divisor) {
-        return decimal.divide(divisor, MathContext.DECIMAL32);
     }
 
 }

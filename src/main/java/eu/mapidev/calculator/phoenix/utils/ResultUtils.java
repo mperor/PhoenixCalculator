@@ -7,6 +7,10 @@ public class ResultUtils {
     public static final String DOT = ".";
     public static final String COMMA = ",";
 
+    // Numbers with a decimal exponent in this range are shown in plain notation, others in scientific notation
+    private static final int MIN_PLAIN_EXPONENT = -7;
+    private static final int MAX_PLAIN_EXPONENT = 15;
+
     public static BigDecimal safeConvertStringToBigDecimal(String string) {
         try {
             string = replaceCommaWithDot(string);
@@ -17,11 +21,11 @@ public class ResultUtils {
     }
 
     public static String convertBigDecimalToString(BigDecimal bigDecimal) {
-        String string = bigDecimal.toString();
-        if (string.contains(DOT))
-            string = removeZeroesInFractionalPart(string);
+        BigDecimal stripped = bigDecimal.stripTrailingZeros();
+        int exponent = stripped.precision() - stripped.scale() - 1;
+        boolean plain = stripped.signum() == 0 || (exponent >= MIN_PLAIN_EXPONENT && exponent <= MAX_PLAIN_EXPONENT);
 
-        return removeDotIfLastCharacter(string).replace(DOT, COMMA);
+        return (plain ? stripped.toPlainString() : stripped.toString()).replace(DOT, COMMA);
     }
 
     private static String replaceCommaWithDot(String string) {
