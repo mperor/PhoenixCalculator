@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static eu.mapidev.calculator.phoenix.utils.ArithmeticOperation.ADD;
+import static eu.mapidev.calculator.phoenix.utils.ArithmeticOperation.DIVIDE;
 import static eu.mapidev.calculator.phoenix.utils.CalculatorDigit.*;
 
 class CalculatorEngineTest {
@@ -46,6 +47,39 @@ class CalculatorEngineTest {
         engine.inputDigit(_1);
         Assertions.assertEquals("1", actualResult);
         Assertions.assertEquals("", actualMemory);
+    }
+
+    @Test
+    void testOperationOnDecimalNumber_returnsMemoryWithComma() {
+        engine.inputDigit(_1).addComma().inputDigit(_5);
+        engine.doOperation(ADD);
+        Assertions.assertEquals("1,5 +", actualMemory);
+
+        engine.inputDigit(_2);
+        engine.calculateResult();
+        Assertions.assertEquals("3,5", actualResult);
+        Assertions.assertEquals("1,5 + 2 =", actualMemory);
+    }
+
+    @Test
+    void testRepeatedCalculateResult_returnsMemoryWithPreviousResultAsLeftOperand() {
+        engine.inputDigit(_1).doOperation(ADD).inputDigit(_2).calculateResult();
+        Assertions.assertEquals("3", actualResult);
+        Assertions.assertEquals("1 + 2 =", actualMemory);
+
+        engine.calculateResult();
+        Assertions.assertEquals("5", actualResult);
+        Assertions.assertEquals("3 + 2 =", actualMemory);
+    }
+
+    @Test
+    void testOperationOnLargeDivisionResult_returnsMemoryInPlainNotation() {
+        engine.inputDigits(_1, _0, _0, _0, _0, _0, _0, _0, _0);
+        engine.doOperation(DIVIDE);
+        engine.inputDigit(_1);
+        engine.doOperation(ADD);
+        Assertions.assertEquals("100000000", actualResult);
+        Assertions.assertEquals("100000000 +", actualMemory);
     }
 
     void assertResultEqualsZeroAndMemoryIsEmpty() {
