@@ -19,12 +19,14 @@ public final class CalculatorKeyBindings {
     public static Optional<CalculatorInput> findInputByEvent(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
 
-        // US layout: Shift+= is "+", Shift+8 is "*"
+        // US layout: Shift+= is "+", Shift+8 is "*", Shift+5 is "%"
         if (isOnlyShiftDown(keyEvent)) {
             if (code == KeyCode.EQUALS)
                 return Optional.of(ArithmeticOperation.ADD);
             if (code == KeyCode.DIGIT8)
                 return Optional.of(ArithmeticOperation.MULTIPLY);
+            if (code == KeyCode.DIGIT5)
+                return Optional.of(Command.PERCENT);
         }
 
         return Optional.ofNullable(switch (code) {

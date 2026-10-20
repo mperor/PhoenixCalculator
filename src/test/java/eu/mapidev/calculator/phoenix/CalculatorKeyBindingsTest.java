@@ -24,6 +24,8 @@ class CalculatorKeyBindingsTest {
             EQUALS      | true  | false | +
             EQUALS      | true  | true  | =
             DIGIT8      | true  | false | x
+            DIGIT5      | true  | false | %
+            DIGIT5      | false | false | 5
             PLUS        | false | false | +
             ADD         | false | false | +
             MINUS       | false | false | -
