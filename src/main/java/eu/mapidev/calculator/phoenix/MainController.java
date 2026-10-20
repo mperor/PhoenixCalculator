@@ -50,15 +50,9 @@ public class MainController implements Initializable {
                 .flatMap(node -> node instanceof Button button ? Stream.of(button) : Stream.empty())
                 .collect(Collectors.toMap(MainController::inputOf, Function.identity()));
 
-        root.setOnKeyPressed(keyEvent -> {
-            String token = CalculatorKeyBindings.findButtonTextByEvent(keyEvent);
-            if (token == null)
-                return;
-
-            var button = buttonsByInput.get(CalculatorInput.fromToken(token));
-            if (button != null)
-                CalculatorKeyBindings.buttonFireWithClickAnimation(button);
-        });
+        root.setOnKeyPressed(keyEvent -> CalculatorKeyBindings.findInputByEvent(keyEvent)
+                .map(buttonsByInput::get)
+                .ifPresent(CalculatorKeyBindings::fireWithClickAnimation));
 
         lblResult.textProperty().bind(viewModel.resultProperty());
         lblMemory.textProperty().bind(viewModel.memoryProperty());
