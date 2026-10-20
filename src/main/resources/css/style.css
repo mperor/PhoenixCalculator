@@ -93,7 +93,7 @@
 
 .title {
     -fx-font-family: 'Lato Light';
-    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-text-fill: rgba(255, 255, 255, 1);
     -fx-font-size: 32px;
 }
 
