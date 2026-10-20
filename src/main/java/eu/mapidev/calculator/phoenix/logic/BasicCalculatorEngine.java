@@ -13,6 +13,8 @@ import java.util.function.Consumer;
 public class BasicCalculatorEngine {
     public static final String DEFAULT_RESULT = "0";
     public static final String ERROR_RESULT = "undefined";
+    // Matches the 16 significant digits used by ArithmeticOperation
+    public static final int MAX_INPUT_DIGITS = 16;
 
     protected Label lblResult = new Label(DEFAULT_RESULT);
     protected Optional<ArithmeticOperation> storedOperation = Optional.empty();
@@ -28,7 +30,7 @@ public class BasicCalculatorEngine {
         String result = lblResult.getText();
         if (DEFAULT_RESULT.equals(result) || calledCalculatorOption != CalledCalculatorOption.INPUT_NUMBER)
             lblResult.setText(digit.toString());
-        else
+        else if (result.chars().filter(Character::isDigit).count() < MAX_INPUT_DIGITS)
             lblResult.setText(result + digit.toString());
 
         calledCalculatorOption = CalledCalculatorOption.INPUT_NUMBER;
