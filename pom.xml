@@ -99,6 +99,12 @@
                     <options>
                         <option>--enable-native-access=javafx.graphics</option>
                     </options>
+                    <!-- Runtime image for packaging: ./mvnw javafx:jlink -> target/image -->
+                    <jlinkImageName>image</jlinkImageName>
+                    <launcher>phoenix-calculator</launcher>
+                    <stripDebug>true</stripDebug>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
                 </configuration>
             </plugin>
         </plugins>
