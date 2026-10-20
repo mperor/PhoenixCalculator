@@ -1,9 +1,11 @@
 package eu.mapidev.calculator.phoenix.utils;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,6 +26,8 @@ class ArithmeticOperationTest {
         assertEquals(ArithmeticOperation.SUBTRACT, ArithmeticOperation.findBySign("-").get());
         assertEquals(ArithmeticOperation.MULTIPLY, ArithmeticOperation.findBySign("x").get());
         assertEquals(ArithmeticOperation.DIVIDE, ArithmeticOperation.findBySign("/").get());
+        assertEquals(Optional.empty(), ArithmeticOperation.findBySign("."));
         assertThrows(NoSuchElementException.class, () -> ArithmeticOperation.findBySign(".").get());
     }
+
 }
