@@ -1,3 +1,6 @@
 target/
 *.iml
 .idea/*
+
+# Local UI mock-up source, not part of the project
+PhoenixCalculatorDraw.drawio
