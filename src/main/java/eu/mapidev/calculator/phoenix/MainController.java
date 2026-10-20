@@ -1,22 +1,20 @@
 package eu.mapidev.calculator.phoenix;
 
-import eu.mapidev.calculator.phoenix.engine.CalculatorEngine;
 import eu.mapidev.calculator.phoenix.engine.CalculatorInput;
-import eu.mapidev.calculator.phoenix.engine.CalculatorState;
-import eu.mapidev.calculator.phoenix.engine.Command;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainController implements Initializable {
 
@@ -27,8 +25,8 @@ public class MainController implements Initializable {
     @FXML
     private Label lblMemory;
 
+    private final CalculatorViewModel viewModel = new CalculatorViewModel();
     private Stage primaryStage;
-    private CalculatorState state = CalculatorState.initial();
     private double dragOffsetX;
     private double dragOffsetY;
 
@@ -47,18 +45,23 @@ public class MainController implements Initializable {
             primaryStage.setY(dragEvent.getScreenY() - dragOffsetY);
         });
 
-        var buttonsByTextName = root.getChildren().stream()
-                .filter(node -> node instanceof Button)
-                .map(node -> (Button) node)
-                .collect(Collectors.toMap(Labeled::getText, Function.identity()));
+        // Fails fast at startup if a calculator button has a missing, unknown or duplicate userData token
+        Map<CalculatorInput, Button> buttonsByInput = root.getChildren().stream()
+                .flatMap(node -> node instanceof Button button ? Stream.of(button) : Stream.empty())
+                .collect(Collectors.toMap(MainController::inputOf, Function.identity()));
 
         root.setOnKeyPressed(keyEvent -> {
-            var button = buttonsByTextName.get(CalculatorKeyBindings.findButtonTextByEvent(keyEvent));
+            String token = CalculatorKeyBindings.findButtonTextByEvent(keyEvent);
+            if (token == null)
+                return;
+
+            var button = buttonsByInput.get(CalculatorInput.fromToken(token));
             if (button != null)
                 CalculatorKeyBindings.buttonFireWithClickAnimation(button);
         });
 
-        showState();
+        lblResult.textProperty().bind(viewModel.resultProperty());
+        lblMemory.textProperty().bind(viewModel.memoryProperty());
     }
 
     public void setPrimaryStage(Stage primaryStage) {
@@ -76,47 +79,15 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void handleDigitPressed(ActionEvent actionEvent) {
-        accept(CalculatorInput.fromToken(((Button) actionEvent.getSource()).getText()));
+    public void handleInput(ActionEvent actionEvent) {
+        viewModel.accept(inputOf((Button) actionEvent.getSource()));
     }
 
-    @FXML
-    public void handlePercentPressed(ActionEvent actionEvent) {
-        accept(Command.PERCENT);
-    }
+    // Buttons carry their input token in userData, so the label text can change freely
+    private static CalculatorInput inputOf(Button button) {
+        if (!(button.getUserData() instanceof String token))
+            throw new IllegalStateException("Calculator button '" + button.getText() + "' has no userData token");
 
-    @FXML
-    public void handleReset(ActionEvent actionEvent) {
-        accept(Command.CLEAR);
-    }
-
-    @FXML
-    public void handleChangeSign(ActionEvent actionEvent) {
-        accept(Command.CHANGE_SIGN);
-    }
-
-    @FXML
-    public void handleCommaPressed(ActionEvent actionEvent) {
-        accept(Command.COMMA);
-    }
-
-    @FXML
-    public void handleArithmeticOperation(ActionEvent actionEvent) {
-        accept(CalculatorInput.fromToken(((Button) actionEvent.getSource()).getText()));
-    }
-
-    @FXML
-    public void handleShowResult(ActionEvent actionEvent) {
-        accept(Command.EQUALS);
-    }
-
-    private void accept(CalculatorInput input) {
-        state = CalculatorEngine.apply(state, input);
-        showState();
-    }
-
-    private void showState() {
-        lblResult.setText(state.display());
-        lblMemory.setText(state.memory());
+        return CalculatorInput.fromToken(token);
     }
 }
