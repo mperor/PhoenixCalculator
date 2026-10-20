@@ -34,6 +34,7 @@ public final class CalculatorKeyBindings {
             case NUMBER_SIGN -> Command.CHANGE_SIGN;
             case COMMA, SEPARATOR, DECIMAL -> Command.COMMA;
             case DELETE, ESCAPE -> Command.CLEAR;
+            case BACK_SPACE -> Command.BACKSPACE;
             case PLUS, ADD -> ArithmeticOperation.ADD;
             case MINUS, SUBTRACT -> ArithmeticOperation.SUBTRACT;
             case MULTIPLY, ASTERISK -> ArithmeticOperation.MULTIPLY;

@@ -5,7 +5,8 @@ public enum Command implements CalculatorInput {
     CHANGE_SIGN("+/-"),
     PERCENT("%"),
     EQUALS("="),
-    CLEAR("C");
+    CLEAR("C"),
+    BACKSPACE("⌫");
 
     private final String token;
 
